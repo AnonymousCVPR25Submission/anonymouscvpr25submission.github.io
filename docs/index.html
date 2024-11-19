@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="static/assets/3d-fire.ico" type="image/x-icon">
+        <title> NeuralGS: Bridging Neural Fields and 3D Gaussian Splatting for Compact 3D Representation</title>
+
+        <link rel="stylesheet" href="static/css/academicons.min.css">
+        <link rel="stylesheet" href="static/css/fontawesome.min.css">
+        <script src="static/js/all.min.js"></script>
+        <script src="static/js/bulma-carousel.min.js"></script>
+
+
+        <link rel="stylesheet" href="static/css/style.css">
+        <script src="static/js/script.js"></script>
+    </head>
+
+    <body>
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+
+            <div class="navbar-brand">
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+        </nav>
+
+
+        <section class="hero">
+            <div class="hero-body">
+                <div class="container is-max-desktop">
+                    <div class="columns is-centered">
+                        <div class="column has-text-centered">
+                            <!-- <h1 class="title is-1 is-size-3-mobile publication-title"> NeuralGS: Bridging Neural Fields and 3D Gaussian Splatting 
+                                for Compact 3D Representation</h1> -->
+                            <h1>
+                                <span class="gradient-text"> 🚀 NeuralGS</span>: Bridging Neural Fields and 3D Gaussian Splatting for Compact 3D Representation
+                            </h1>
+                            <h2 class="subtitle is-4 opacity-1" style="margin-top: 1rem;opacity:0.7">Anonymous CVPR submission</h2>
+                            <div class="is-size-5 publication-authors">
+                                <span class="author-block"> Paper ID 801 </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="hero teaser is-light">
+            <div class="hero-body">
+                <div class="container">
+                    <div id="results-carousel" class="carousel results-carousel">
+                        <div class="item item-bonsai">
+                            <video poster="" id="bonsai" autoplay controls muted loop playsinline height="100%">
+                                <source src="./static/videos/bonsai.mp4" type="video/mp4">
+                            </video>
+
+                        </div>
+                        <div class="item item-bicycle">
+                            <video poster="" id="bicycle" autoplay controls muted loop playsinline height="100%">
+                                <source src="./static/videos/bicycle.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="item item-garden">
+                            <video poster="" id="garden" autoplay controls muted loop playsinline height="100%">
+                                <source src="./static/videos/garden.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="item item-truck">
+                            <video poster="" id="truck" autoplay controls muted loop playsinline height="100%">
+                                <source src="./static/videos/truck.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="item item-playroom">
+                            <video poster="" id="playroom" autoplay controls muted loop playsinline height="100%">
+                                <source src="./static/videos/playroom.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    <div style="height: 1rem;"></div>
+                    <h2 class="subtitle has-text-centered is-size-6-mobile">
+                        Compressing 3D Gaussian Splats up to 31x (26x avg.) for reduced storage requirements and
+                        accelerated novel view synthesis.
+                    </h2>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container is-max-desktop is-mobile">
+                <!-- Abstract. -->
+                <div class="columns is-centered">
+                    <div class="column is-four-fifths">
+                        <div class="has-text-centered">
+                            <h2 class="title is-3">📌 Abstract</h2>
+                        </div>
+                        <br>
+                        <div class="content has-text-justified">
+                            Recently, 3D Gaussian Splatting (3DGS) has gained popularity, demonstrating superior quality 
+                            and rendering speed in novel view synthesis. However, 3DGS requires millions of 3D Gaussians, 
+                            each with extensive associated attributes, resulting in significant storage and transmission costs. 
+                            In contrast, neural fields like NeRF can represent complex 3D scenes with Multi-Layer Perceptron 
+                            (MLP) neural networks using only a few megabytes. In this paper, we present a novel Gaussian compression 
+                            method  <strong>NeuralGS</strong> that effectively adopts the neural field representation to encode the attributes 
+                            of 3D Gaussians with MLPs, requiring a small storage size even for a large-scale scene.However, naively 
+                            fitting the Gaussian attributes with an MLP network leads to severely degenerated quality. 
+                            To address this, we adopt a clustering strategy and fit the Gaussians with multiple tiny MLPs for 
+                            different clusters, based on importance scores of Gaussians as fitting weights.We validate our approach 
+                            on multiple datasets, achieving a <strong>38x</strong> average model size reduction without harming the visual quality. 
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container is-max-desktop is-mobile">
+                <div class="is-centered" style="margin-bottom: 2rem;">
+                    <h2 class="title is-3">💡 Compression Method</h2>
+                </div>
+                <p>
+                    We propose a simple yet effective framework <strong>NeuralGS</strong>, which adopts the neural field 
+                    representation to encode the attributes of 3D Gaussians with MLPs to enable a compact 3D  representation. 
+                    Specifically, as shown in <em>Figure 1</em>, we use a designed criterion to assess the importance of 
+                    each Gaussian, allowing us to prune Gaussians that have minimal impact on renderings. 
+                    To reduce variations among Gaussians, we cluster these 3D Gaussians based on their attributes, ensuring 
+                    similarity within each cluster. Then, each cluster is then assigned a tiny MLP that fits the attributes of 
+                    its 3D Gaussians. Given the varying contributions of each Gaussian to the renderings, we apply Gaussian’s 
+                    importances as the fitting weights in the MLP fitting. We also incorporate a fine-tuning stage along with 
+                    frequency loss to restore quality and preserve high-frequency details.
+
+                    We address the storage and rendering issue of 3D Gaussian Splatting (3DGS) by compressing the
+                    reconstructed scene parameters and rendering the compressed representation via GPU rasterization.
+                    To compress the scenes, we first analyze its components and observe that the Spherical Harmonics
+                    (SH) coefficients and the multivariate Gaussian parameters take up the majority of storage space and
+                    are highly redundant.
+                    Our compression pipeline consists of three steps:
+                </p>
+                <br>
+                <div class="is-centered">
+                    <figure style="text-align: center;">
+                        <img src="static/img/pipeline.png" alt="Compression Pipeline" style="display: inline-block;">
+                        <figcaption style="text-align: center; margin-top: 0.5rem;">Figure 1: Overview of <strong>NeuralGS</strong>. </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section class="section">
+            <div class="container is-max-desktop is-mobile">
+                <div class="is-centered" style="margin-bottom: 2rem;">
+                    <h2 class="title is-3">🔗 Results</h2>
+                </div>
+                <p>
+                    We evaluate our method on four datasets for comparison. Our method achieves a 26x
+                    compression rate on average on real scenes at minimal loss in visual quality.
+                    Our rasterization based renderer achieves a 3.5x speedup for the compressed scenes compared to the
+                    compute shader based renderer of Kerbl et al.
+                    
+                    The FPS measures shown below were obtained on the bicycle scene from Mip-NeRF360 on an NVIDIA A100 GPU.
+                </p>
+                <br>
+
+                <div class="is-centered" style="margin-bottom: 1.5rem;">
+                    <h3 class="title is-3">Qualitative Comparisons</h3>
+                </div>
+
+                <div class="is-centered">
+                    <figure style="text-align: center;">
+                        <img src="static/img/vis_comprison.png" alt="Compression Pipeline" style="display: inline-block;">
+                        <figcaption style="text-align: center; margin-top: 0.5rem;"> Figure 2: Qualitative comprison on the mentioned four datasets. </figcaption>
+                    </figure>
+                </div>
+
+                <br>
+                <div class="is-centered" style="margin-bottom: 1.5rem;">
+                    <h3 class="title is-3">Quantitative Comparisons</h3>
+                </div>
+
+                <div class="is-centered">
+                    <figure style="text-align: center;">
+                        <figcaption style="text-align: center; margin-top: 0.5rem;"> Table 1. Quantitative results evaluated on <em>Mip-NeRF 360, Tanks&Temples, and Deep Blending</em> datasets. We highlight the
+                            best-performing results in <span style="color: red;">red</span> and the second-best results in <span style="color: #e9d600;">yellow</span> for all compression methods </figcaption>
+                        <img src="static/img/tables/table1.png" alt="Compression Pipeline" style="display: inline-block;">
+                    </figure>
+                </div>
+                <br>
+                <!-- <div class="is-centered" style="display: flex; justify-content: center; align-items: flex-start;">
+                    <figure style="text-align: center; margin: 0 1rem;">
+                        <img src="static/img/tables/table2.png" alt="Table 2" style="display: inline-block;">
+                        <figcaption style="text-align: center; margin-top: 0.5rem;">Table 2.</figcaption>
+                    </figure>
+                    <figure style="text-align: center; margin: 0 1rem;">
+                        <img src="static/img/tables/table3.png" alt="Table 3" style="display: inline-block;">
+                        <figcaption style="text-align: center; margin-top: 0.5rem;">Table 3.</figcaption>
+                    </figure>
+                </div> -->
+
+                <div class="is-centered" style="display: flex; justify-content: center; align-items: flex-start;">
+  
+                    <figure style="text-align: center; margin: 50 1rem;">
+                        <figcaption style="text-align: center; margin-top: 0.5rem;">Table 2. Quantitative results of the proposed method evaluated on the <em>NeRF-Synthetic</em> dataset. We highlight the best-performing results in <span style="color: red;">red</span> and the second-best results in <span style="color: #e9d600;">yellow</span> for all compression methods.</figcaption>
+                        <img src="static/img/tables/table2.png" alt="Table 2" style="display: inline-block; width: 45%;">
+                    </figure>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section class="section">
+            <div class="container is-max-desktop">
+
+                <div class="columns is-centered has-text-centered">
+                    <h2 class="title is-3">🥳 Demo Examples</h2>
+                </div>
+                <div class="column">
+                    <p>Image comparisons for the baseline and compressed reconstruction. All images are taken from the
+                        test
+                        set.</p>
+                </div>
+                <div class="columns is-centered has-text-centered">
+                    <!-- Visual Effects. -->
+                    <div class="column">
+                        <div class="content">
+                            <div class="bal-container-small image-compare">
+
+                                <div class="bal-after">
+                                    <img src="static/img/samples/bicycle/ours/00000.png">
+                                    <div class="bal-afterPosition afterLabel" style="z-index:1;">
+                                        Ours
+                                    </div>
+                                    <div class="bal-afterPosition afterSize" style="z-index:1;">
+                                        47 MB
+                                    </div>
+                                </div>
+
+                                <div class="bal-before" style="width:96.4968152866242%;">
+                                    <div class="bal-before-inset" style="width: 539px;">
+                                        <img src="static/img/samples/bicycle/baseline/00000.png">
+                                        <div class="bal-beforePosition beforeLabel">
+                                            3DGS
+                                        </div>
+                                        <div class="bal-beforePosition beforeSize">
+                                            1.5 GB
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bal-handle" style="left:96.4968152866242%;">
+                                    <span class=" handle-left-arrow"></span>
+                                    <span class="handle-right-arrow"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="bal-container-small image-compare">
+
+                                <div class="bal-after">
+                                    <img src="static/img/samples/garden/ours/00000.png">
+                                    <div class="bal-afterPosition afterLabel" style="z-index:1;">
+                                        Ours
+                                    </div>
+                                    <div class="bal-afterPosition afterSize" style="z-index:1;">
+                                        47 MB
+                                    </div>
+                                </div>
+
+                                <div class="bal-before" style="width:96.4968152866242%;">
+                                    <div class="bal-before-inset" style="width: 539px;">
+                                        <img src="static/img/samples/garden/baseline/00000.png">
+                                        <div class="bal-beforePosition beforeLabel">
+                                            3DGS
+                                        </div>
+                                        <div class="bal-beforePosition beforeSize">
+                                            1.4 GB
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bal-handle" style="left:96.4968152866242%;">
+                                    <span class=" handle-left-arrow"></span>
+                                    <span class="handle-right-arrow"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="content">
+                            <div class="bal-container-small image-compare">
+
+                                <div class="bal-after">
+                                    <img src="static/img/samples/truck/ours/00000.png">
+                                    <div class="bal-afterPosition afterLabel" style="z-index:1;">
+                                        Ours
+                                    </div>
+                                    <div class="bal-afterPosition afterSize" style="z-index:1;">
+                                        21 MB
+                                    </div>
+                                </div>
+
+                                <div class="bal-before" style="width:96.4968152866242%;">
+                                    <div class="bal-before-inset" style="width: 539px;">
+                                        <img src="static/img/samples/truck/baseline/00000.png">
+                                        <div class="bal-beforePosition beforeLabel">
+                                            3DGS
+                                        </div>
+                                        <div class="bal-beforePosition beforeSize">
+                                            600 MB
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bal-handle" style="left:96.4968152866242%;">
+                                    <span class=" handle-left-arrow"></span>
+                                    <span class="handle-right-arrow"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="bal-container-small image-compare">
+
+                                <div class="bal-after">
+                                    <img src="static/img/samples/playroom/ours/00002.png">
+                                    <div class="bal-afterPosition afterLabel" style="z-index:1;">
+                                        Ours
+                                    </div>
+                                    <div class="bal-afterPosition afterSize" style="z-index:1;">
+                                        22 MB
+                                    </div>
+                                </div>
+
+                                <div class="bal-before" style="width:96.4968152866242%;">
+                                    <div class="bal-before-inset" style="width: 539px;">
+                                        <img src="static/img/samples/playroom/baseline/00002.png">
+                                        <div class="bal-beforePosition beforeLabel">
+                                            3DGS
+                                        </div>
+                                        <div class="bal-beforePosition beforeSize">
+                                            602 MB
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bal-handle" style="left:96.4968152866242%;">
+                                    <span class=" handle-left-arrow"></span>
+                                    <span class="handle-right-arrow"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--/ Visual Effects. -->
+                </div>
+                <!--/ Matting. -->
+
+
+
+            </div>
+        </section>
+
+
+
+        <script>
+            for (var elm of document.querySelectorAll(".image-compare")) {
+                new BeforeAfter(elm)
+            }
+            var options = {
+                slidesToScroll: 1,
+                slidesToShow: 3,
+                loop: true,
+                infinite: true,
+                autoplay: false,
+                autoplaySpeed: 3000,
+            }
+
+            // Initialize all div with carousel class
+            var carousels = bulmaCarousel.attach('.carousel', options);
+
+            for (var i = 0; i < carousels.length; i++) {
+                // Add listener to  event
+                carousels[i].on('before:show', () => { });
+            }
+
+            // Access to bulmaCarousel instance of an element
+            var element = document.querySelector('#my-element');
+            if (element && element.bulmaCarousel) {
+                // bulmaCarousel instance is available as element.bulmaCarousel
+                element.bulmaCarousel.on('before-show', () => { });
+            }
+        </script>
+    </body>
+
+    </html>
