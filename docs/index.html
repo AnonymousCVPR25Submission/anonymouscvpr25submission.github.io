@@ -98,8 +98,7 @@
                     </div>
                     <div style="height: 1rem;"></div>
                     <h2 class="subtitle has-text-centered is-size-6-mobile">
-                        Compressing 3D Gaussian Splats up to 31x (26x avg.) for reduced storage requirements and
-                        accelerated novel view synthesis.
+                        We propose <span class="gradient-text"><strong>NeuralGS</strong></span>, a novel framework that effectively adopts the neural field representation to encode the attributes of 3D Gaussians with multiple tiny MLPs, only requiring a small model size even for a large-scale scene.
                     </h2>
                 </div>
             </div>
@@ -174,12 +173,7 @@
                     <h2 class="title is-3">🔗 Results</h2>
                 </div>
                 <p>
-                    We evaluate our method on four datasets for comparison. Our method achieves a 26x
-                    compression rate on average on real scenes at minimal loss in visual quality.
-                    Our rasterization based renderer achieves a 3.5x speedup for the compressed scenes compared to the
-                    compute shader based renderer of Kerbl et al.
-                    
-                    The FPS measures shown below were obtained on the bicycle scene from Mip-NeRF360 on an NVIDIA A100 GPU.
+                    We evaluate our method on four datasets for comparison on NVIDIA A100 GPUs.
                 </p>
                 <br>
 
@@ -226,159 +220,6 @@
                     </figure>
 
                 </div>
-            </div>
-        </section>
-
-
-        <section class="section">
-            <div class="container is-max-desktop">
-
-                <div class="columns is-centered has-text-centered">
-                    <h2 class="title is-3">🥳 Demo Examples</h2>
-                </div>
-                <div class="column">
-                    <p>Image comparisons for the baseline and compressed reconstruction. All images are taken from the
-                        test
-                        set.</p>
-                </div>
-                <div class="columns is-centered has-text-centered">
-                    <!-- Visual Effects. -->
-                    <div class="column">
-                        <div class="content">
-                            <div class="bal-container-small image-compare">
-
-                                <div class="bal-after">
-                                    <img src="static/img/samples/bicycle/ours/00000.png">
-                                    <div class="bal-afterPosition afterLabel" style="z-index:1;">
-                                        Ours
-                                    </div>
-                                    <div class="bal-afterPosition afterSize" style="z-index:1;">
-                                        47 MB
-                                    </div>
-                                </div>
-
-                                <div class="bal-before" style="width:96.4968152866242%;">
-                                    <div class="bal-before-inset" style="width: 539px;">
-                                        <img src="static/img/samples/bicycle/baseline/00000.png">
-                                        <div class="bal-beforePosition beforeLabel">
-                                            3DGS
-                                        </div>
-                                        <div class="bal-beforePosition beforeSize">
-                                            1.5 GB
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="bal-handle" style="left:96.4968152866242%;">
-                                    <span class=" handle-left-arrow"></span>
-                                    <span class="handle-right-arrow"></span>
-                                </div>
-
-                            </div>
-
-                            <div class="bal-container-small image-compare">
-
-                                <div class="bal-after">
-                                    <img src="static/img/samples/garden/ours/00000.png">
-                                    <div class="bal-afterPosition afterLabel" style="z-index:1;">
-                                        Ours
-                                    </div>
-                                    <div class="bal-afterPosition afterSize" style="z-index:1;">
-                                        47 MB
-                                    </div>
-                                </div>
-
-                                <div class="bal-before" style="width:96.4968152866242%;">
-                                    <div class="bal-before-inset" style="width: 539px;">
-                                        <img src="static/img/samples/garden/baseline/00000.png">
-                                        <div class="bal-beforePosition beforeLabel">
-                                            3DGS
-                                        </div>
-                                        <div class="bal-beforePosition beforeSize">
-                                            1.4 GB
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="bal-handle" style="left:96.4968152866242%;">
-                                    <span class=" handle-left-arrow"></span>
-                                    <span class="handle-right-arrow"></span>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column">
-                        <div class="content">
-                            <div class="bal-container-small image-compare">
-
-                                <div class="bal-after">
-                                    <img src="static/img/samples/truck/ours/00000.png">
-                                    <div class="bal-afterPosition afterLabel" style="z-index:1;">
-                                        Ours
-                                    </div>
-                                    <div class="bal-afterPosition afterSize" style="z-index:1;">
-                                        21 MB
-                                    </div>
-                                </div>
-
-                                <div class="bal-before" style="width:96.4968152866242%;">
-                                    <div class="bal-before-inset" style="width: 539px;">
-                                        <img src="static/img/samples/truck/baseline/00000.png">
-                                        <div class="bal-beforePosition beforeLabel">
-                                            3DGS
-                                        </div>
-                                        <div class="bal-beforePosition beforeSize">
-                                            600 MB
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="bal-handle" style="left:96.4968152866242%;">
-                                    <span class=" handle-left-arrow"></span>
-                                    <span class="handle-right-arrow"></span>
-                                </div>
-
-                            </div>
-
-                            <div class="bal-container-small image-compare">
-
-                                <div class="bal-after">
-                                    <img src="static/img/samples/playroom/ours/00002.png">
-                                    <div class="bal-afterPosition afterLabel" style="z-index:1;">
-                                        Ours
-                                    </div>
-                                    <div class="bal-afterPosition afterSize" style="z-index:1;">
-                                        22 MB
-                                    </div>
-                                </div>
-
-                                <div class="bal-before" style="width:96.4968152866242%;">
-                                    <div class="bal-before-inset" style="width: 539px;">
-                                        <img src="static/img/samples/playroom/baseline/00002.png">
-                                        <div class="bal-beforePosition beforeLabel">
-                                            3DGS
-                                        </div>
-                                        <div class="bal-beforePosition beforeSize">
-                                            602 MB
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="bal-handle" style="left:96.4968152866242%;">
-                                    <span class=" handle-left-arrow"></span>
-                                    <span class="handle-right-arrow"></span>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <!--/ Visual Effects. -->
-                </div>
-                <!--/ Matting. -->
-
-
-
             </div>
         </section>
 
